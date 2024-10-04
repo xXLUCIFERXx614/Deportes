@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clubes Registrados</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" href="/css/vista.css"> 
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-4">
+	    <div class="container d-flex justify-content-center align-items-center">
+	        <a class="navbar-brand">
+	            <span class="mundialito-title">Mundialito</span>
+	        </a>
+	    </div>
+	</nav>
+    <div class="container p-4">
+        <center>
+            <h2 class="h1h2">Clubes Registrados</h2>
+        </center><br><br>
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Entrenador</th>
+                    <th>Asociación</th>
+                    <th>Competiciones</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="club : ${listaClubes}">
+                    <td th:text="${club.id}"></td>
+                    <td th:text="${club.nombre}"></td>
+					<td th:if="${club.entrenador != null}" th:text="${club.entrenador.nombre}"></td>
+					<td th:if="${club.entrenador == null}">Sin entrenador asignado</td>
+					<td th:if="${club.asociacion != null}" th:text="${club.asociacion.nombre}"></td>
+					<td th:if="${club.asociacion == null}">Sin asociacion asignado</td>
+                    <td>
+                        <ul class="list-unstyled">
+						    <li th:if="${#lists.isEmpty(club.competiciones)}">Sin competicion asignada</li>
+						    <li th:each="competicion : ${club.competiciones}" th:text="${competicion.nombre}"></li>
+						</ul>
+                    </td>
+                    <td>
+                        <a class="btn btn-info btn-xs" th:href="@{'/club/editar/' + ${club.id}}" th:text="'editar'"></a>
+                        &nbsp;&nbsp;
+                        <a class="btn btn-danger btn-xs" th:href="@{'/club/eliminar/' + ${club.id}}" th:text="'eliminar'"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            <div class="p-3"><br><a th:href="@{/verClub/formClub}" class="btn-custom">Insertar Club</a></div>
+            <div class="p-3"><br><a th:href="@{/}" class="btn-custom">Inicio</a></div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+		<footer class="footer bg-dark text-white fixed-bottom">
+		    <div class="container">
+		        <p class="text-center mb-0 py-2">Jesus David Calderon Gomez</p>
+		    </div>
+		</footer>
+</body>
+</html>

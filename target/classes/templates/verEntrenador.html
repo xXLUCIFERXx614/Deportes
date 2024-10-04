@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrenadores Registrados</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" href="/css/vista.css"> 
+	
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-4">
+		    <div class="container d-flex justify-content-center align-items-center">
+		        <a class="navbar-brand">
+		            <span class="mundialito-title">Mundialito</span>
+		        </a>
+		    </div>
+		</nav>
+    <div class="container p-4">
+        <center>
+            <h2 class="h1h2">Entrenadores Registrados</h2>
+        </center><br><br>
+        <table class="table table-dark table-hover">
+            <thead>
+				<tr>
+				    <th>Id</th>
+				    <th>Nombre</th>
+				    <th>Apellido</th>
+				    <th>Edad</th>
+					<th>Nacionalidad</th>
+					<th>Club</th>
+				    <th>Acciones</th>
+				</tr>
+            </thead>
+			<tbody>
+			     <tr th:each="entrenador : ${listaEntrenadores}">
+			         <td th:text="${entrenador.id}"></td>
+			         <td th:text="${entrenador.nombre}"></td>
+			         <td th:text="${entrenador.apellido}"></td>
+			         <td th:text="${entrenador.edad}"></td>
+					 <td th:text="${entrenador.nacionalidad}"></td>
+					 <td th:text="${entrenador.club != null ? entrenador.club.nombre : 'Sin club asignado'}"></td>
+			         <td>
+			             <a class="btn btn-info btn-sm" th:href="@{/entrenador/editar/{id}(id=${entrenador.id})}">Editar</a>
+			             <a class="btn btn-danger btn-sm" th:href="@{/entrenador/eliminar/{id}(id=${entrenador.id})}">Eliminar</a>
+			         </td>
+			     </tr>
+			 </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            <div class="p-3"><br><a th:href="@{/verEntrenador/formEntrenador}" class="btn-custom">Insertar Entrenador</a></div>
+            <div class="p-3"><br><a th:href="@{/}" class="btn-custom">Inicio</a></div>
+        </div>
+    </div>
+	<footer class="footer bg-dark text-white fixed-bottom">
+	    <div class="container">
+	        <p class="text-center mb-0 py-2">Jesus David Calderon Gomez</p>
+	    </div>
+	</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>

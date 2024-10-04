@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competiciones Registradas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" href="/css/vista.css"> 
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-4">
+		    <div class="container d-flex justify-content-center align-items-center">
+		        <a class="navbar-brand">
+		            <span class="mundialito-title">Mundialito</span>
+		        </a>
+		    </div>
+		</nav>
+    <div class="container p-4">
+        <center>
+            <h2 class="h1h2">Competiciones Registradas</h2>
+        </center><br><br>
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Monto Premio</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="competicion : ${listaCompeticiones}">
+                    <td th:text="${competicion.id}"></td>
+                    <td th:text="${competicion.nombre}"></td>
+                    <td th:text="${competicion.montoPremio}"></td>
+                    <td th:text="${competicion.fechaInicio}"></td>
+                    <td th:text="${competicion.fechaFin}"></td>
+                    <td>
+                        <a class="btn btn-info btn-sm" th:href="@{/competicion/editar/{id}(id=${competicion.id})}">Editar</a>
+                        <a class="btn btn-danger btn-sm" th:href="@{/competicion/eliminar/{id}(id=${competicion.id})}">Eliminar</a>
+                    </td>
+                </tr>
+             </tbody>
+        </table>
+        <div class="d-flex justify-content-center">
+            <div class="p-3"><br><a th:href="@{/verCompeticion/formCompeticion}" class="btn-custom">Insertar Competición</a></div>
+            <div class="p-3"><br><a th:href="@{/}" class="btn-custom">Inicio</a></div>
+        </div>
+    </div>
+	
+		<footer class="footer bg-dark text-white fixed-bottom">
+		    <div class="container">
+		        <p class="text-center mb-0 py-2">Jesus David Calderon Gomez</p>
+		    </div>
+		</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>
